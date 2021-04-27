@@ -24,3 +24,16 @@
 ```
     useHistory、useLocation、useParams、useRouteMatch
 ```
+- 实现一个简单的Link组件：
+```$xslt
+interface LinkProps {
+    to:string
+}
+const Link:React.FC<LinkProps> = ({children,to}) =>{
+    const history = useHistory()
+    return (
+        <a href={a} onClick={()=>history.push(to)}/>
+    )
+}
+```
+#### redux
