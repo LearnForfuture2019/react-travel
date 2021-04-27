@@ -16,6 +16,31 @@ class HeaderComponent extends React.Component<RouteComponentProps,State> {
             language:storeState.language,
             languageList:storeState.languageList
         }
+        store.subscribe(this.handleStoreChange)
+    }
+    handleStoreChange = ()=>{
+        const state = store.getState()
+        this.setState({
+            language:state.language,
+            languageList:state.languageList
+        })
+    }
+    menuClickHandler = (e)=>{
+        console.log(e.key)
+        let action
+        if(e.key === 'new'){
+            //处理新语言添加action
+            action = {
+                type:'add_language',
+                payload:{name:'新语言',code:'new_language'}
+            }
+        }else {
+            action = {
+                type:'change_language',
+                payload:e.key
+            }
+        }
+        store.dispatch(action)
     }
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         const {history} = this.props
@@ -29,7 +54,7 @@ class HeaderComponent extends React.Component<RouteComponentProps,State> {
                         <Dropdown.Button
                             style={{marginLeft: 15}}
                             overlay={
-                                <Menu>
+                                <Menu onClick={this.menuClickHandler}>
                                     {
                                         this.state.languageList.map((l)=>(
                                             <Menu.Item key={l.code}>
@@ -37,6 +62,7 @@ class HeaderComponent extends React.Component<RouteComponentProps,State> {
                                             </Menu.Item>
                                         ))
                                     }
+                                    <Menu.Item key={'new'}>添加新语言</Menu.Item>
                                 </Menu>
                             }
                             icon={<GlobalOutlined/>}
