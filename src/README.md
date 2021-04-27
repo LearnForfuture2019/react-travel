@@ -51,3 +51,6 @@ action有两个参数：1.type：表示希望对state作出的改变；2.payload
 ```
 connect的第一个参数传入store中的state；第二个参数，传入store中的dispatch；并将它们以props的形式
 注入到组件中去
+##### 在函数组件中使用react-redux
+- 从react-redux中引入hooks，useSelector。使用useSelector可以帮助我们获取到store中的数据
+- 使用useDispatch来派发dispatch
