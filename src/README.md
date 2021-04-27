@@ -15,3 +15,12 @@
     <Route path="/detail/:touristRouteId" component={DetailPage}/>
 ```
 对于``:touristRouteId``,它必须与组件定义的类名一致
+
+- 对于没有被Route直接渲染的组件，如果相想要使用history、location、match等方法，
+那么需要使用withRouter来对该组件进行包裹。（withRouter就是一个高阶组件，
+通过在内部进行参数的传递，使得非路由组件也能使用路由）
+
+- 非路由组件希望使用路由方法，第二种方式是使用hooks。即
+```
+    useHistory、useLocation、useParams、useRouteMatch
+```
