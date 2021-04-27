@@ -37,3 +37,17 @@ const Link:React.FC<LinkProps> = ({children,to}) =>{
 }
 ```
 #### redux
+- 使用流程：首先创建一个reducer；将reducer当参数传入redux下的createStore方法下，生成一个store
+在需要使用store状态的地方引入store。通过store.getState方法可以取得响应的状态；为了能够使得
+当前组件能够感知到store中状态的改变，使用store.subscribe()方法来进行订阅。当我们希望改变store中的状态时，
+使用store.dispatch方法来通知store进行状态的改变。dispatch方法传入的参数就是action；一般来说，
+action有两个参数：1.type：表示希望对state作出的改变；2.payload：表示传入的参数
+#### react-redux
+1. 在入口函数引入react-redux
+2. 使用Provider组件来包裹入口函数
+3. connect函数类似于高阶组件，它内部封装了getState、subscribe以及dispatch方法。connect方法调用方式
+```react
+    connect(mapStateToProps,mapDispatchToProps)(component)
+```
+connect的第一个参数传入store中的state；第二个参数，传入store中的dispatch；并将它们以props的形式
+注入到组件中去
